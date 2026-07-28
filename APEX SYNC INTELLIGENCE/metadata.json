@@ -1,0 +1,6 @@
+{
+  "name": "Apex Sync",
+  "description": "The official corporate digital headquarters of Apex Sync — an Intelligence Engineering company building the future of synchronized human-AI systems.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

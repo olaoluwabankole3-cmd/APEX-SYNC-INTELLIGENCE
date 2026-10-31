@@ -6,6 +6,7 @@ import { NotesPage, ArticlePage, CareersPage, ContactPage, NotFoundPage } from '
 import { notes } from './qorvex3/content';
 import './qorvex3/base.css';
 import './qorvex3/pages.css';
+import './qorvex3/details.css';
 
 function RouteContent({path}:{path:string}) {
   switch(path){

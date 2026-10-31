@@ -310,3 +310,12 @@ html{scroll-padding-top:72px}
 }
 @media(hover:hover){.method-tab:hover:not(.active){background:#A65A2E10;color:#A65A2E}.note-button:hover{border-color:#A65A2E}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important}}
+
+
+/* Editorial type refinement: preserve visible word breaks at every viewport. */
+.hero-words h1{word-spacing:.17em}
+.statement-main h2{letter-spacing:-.055em;word-spacing:.09em}
+.method-title-row h2,.notes-head h2,.people-inner h2{letter-spacing:-.055em;word-spacing:.09em}
+.note-main h3{letter-spacing:-.035em;word-spacing:.08em}
+.end-core h2{letter-spacing:-.06em;word-spacing:.11em}
+.note-full[hidden]{display:none!important}

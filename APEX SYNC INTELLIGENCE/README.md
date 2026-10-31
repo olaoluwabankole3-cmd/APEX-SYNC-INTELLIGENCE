@@ -2,7 +2,7 @@
 
 This is the **multi-page QORVEX corporate website**, built from the earlier APEX SYNC INTELLIGENCE / QORVEX V1 and V2 design iterations. It preserves the approved QORVEX identity and separates the company's story, philosophy, product, innovation and editorial content into dedicated experiences.
 
-**This branch is a review prototype. The public production branch remains unchanged.**
+**Public release:** approved for deployment to the Cloudflare Pages production branch. Update the custom domain and official contact details separately.
 
 ## Website pages
 
@@ -63,14 +63,14 @@ Vite builds to \`dist\`. Cloudflare Pages automatically creates a preview for th
 - No fake contact form, fabricated public corporate email, or nonexistent back-end submission.
 - Field Notes are **original editorial perspectives**, not dated news claims.
 
-## Before a public launch
+## Remaining production improvements
 
 1. Founder approval of each page and brand artwork.
 2. Test on real iOS and Android devices in addition to automated responsive browser runs.
 3. Provide **verified** contact details and legal/privacy documents before creating enquiry forms.
-4. Remove the temporary \`noindex, nofollow\` meta tag when the final domain, canonical URLs and launch are approved.
+4. The temporary \`noindex, nofollow\` directive was removed for the public release. Configure canonical URLs and any redirects once the final QORVEX domain is connected.
 5. Set up analytics with privacy consideration and a genuine editorial workflow.
 6. Consider building static route-level HTML via SSR or prerendering for the strongest search indexing and social sharing.
 7. Run Lighthouse and accessibility reviews, self-host fonts, verify 404 behavior on Cloudflare Pages, then deploy deliberately.
 
-This prototype has not been merged into production.
+Use the production website as the source of truth after release. Keep the older branch previews for historical visual comparison only.

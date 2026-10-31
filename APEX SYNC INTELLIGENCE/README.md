@@ -1,41 +1,37 @@
-# QORVEX Corporate Website — Initial Brand Integration
+# QORVEX Corporate Website — Experience V2
 
-This is a non-destructive first iteration of the QORVEX website based on the original APEX SYNC INTELLIGENCE React/Vite project. The feature branch preserves all legacy site components for reference, but the new entry point renders QORVEX-specific content.
+A brand-led, responsive company website built on the existing React / Vite foundation. This is a design-review branch, not the production site.
 
-## Start
+## What's new
 
-From the \`APEX SYNC INTELLIGENCE\` directory:
+- Custom **editorial/architectural** visual language, not a generic AI-dashboard landing page
+- A tailored hero composition centered on the approved QORVEX wordmark and emblem
+- Purposeful interactive **QORVEX Method** (Quest / Vision / Execution / Impact)
+- An accessible, content-rich **CORTEX** conceptual systems showcase
+- Original short-form **Field Notes** to give the website meaningful reading value
+- Mobile-first navigation and layout adaptations with 320–430 px support
+- Reduced-motion support, keyboard-accessible controls, semantic landmarks, and skip link
+- Independent verified corporate information only; no invented claims or fake contact form
 
-\`\`\`bash
-npm install
-npm run dev
+## Run
+
+From \`APEX SYNC INTELLIGENCE\`:
+
+\`\`\`sh
+npm ci
 npm run lint
 npm run build
+npm run dev
 \`\`\`
 
-## New site code
+## Review before launch
 
-- \`src/QorvexSite.tsx\`: responsive single-page corporate website
-- \`src/qorvex.css\`: QORVEX design system and responsive styles
-- \`public/qorvex-wordmark.svg\`: approved brand SVG wordmark
-- \`public/qorvex-emblem.svg\`: approved geometric Q emblem
-- \`public/favicon.svg\`: approved app icon construction
-- \`src/App.tsx\`: renders QorvexSite
+1. Check 320 / 360 / 390 / 430 / 768 / 1024 / 1440 px widths on real browsers and touch devices.
+2. Validate color contrast, reduced motion, keyboard navigation and screen-reader announcements.
+3. Approve final corporate messaging and writing. The two field notes are editorial drafts, not news reports.
+4. Supply verified contact channel and approved privacy notice before adding forms or analytics.
+5. Perform Lighthouse performance/accessibility auditing and consider font self-hosting.
+6. Confirm domain, trademark and company registration statements before production deployment.
+7. For long-term content discovery, split Field Notes into accessible permalink pages when a publishing workflow is established.
 
-## Business content safeguards
-
-- QORVEX is the company; CORTEX is its **only current product**.
-- CORTEX is identified as **in development**, with initial focus on financial institutions.
-- No unverified jobs, client names, testimonials, numerical performance claims, legal registrations, or corporate contact details are published.
-- No fake contact form: the Contact section explicitly says contact channels are pending verification.
-- There is no production domain/deployment configuration yet.
-
-## Before launching
-
-1. Verify final brand approval and trademark/domain availability.
-2. Provide a verified corporate contact address and working backend or mail service if a form is desired.
-3. Review accessibility, SEO, responsive behavior, build output, and security headers.
-4. Determine whether the site should be split into separate SEO-friendly routes/pages.
-5. Confirm hiring claims and whether a journal has genuine approved articles.
-
-The original site remains intact on the repository's \`main\` branch. This branch is intended for review only.
+The original APEX SYNC implementation is retained on \`main\`; the QORVEX V1 work is retained on \`feature/qorvex-corporate-site-v1\`. Do not deploy V2 to production until reviewed.

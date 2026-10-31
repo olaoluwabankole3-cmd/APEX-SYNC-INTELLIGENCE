@@ -11,6 +11,11 @@
   overflow:hidden;
   color:#F5F1E8;
   background:#161615;
+  /* Keep the next cream section below the initial visible screen. */
+  min-height:calc(100vh - 86px);
+  min-height:calc(100svh - 86px);
+  display:flex;
+  flex-direction:column;
 }
 .home-hero::before{
   content:"";
@@ -35,7 +40,9 @@
 }
 .home-hero .page-frame{max-width:1310px}
 .home-hero-grid{
-  min-height:630px;
+  flex:1 0 auto;
+  /* A shorter laptop still gets the full hero and visible scroll cue. */
+  min-height:min(630px, calc(100svh - 156px));
   padding:44px 0 66px;
   grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);
   column-gap:12px;
@@ -199,6 +206,11 @@
   .home-device{height:410px}
 }
 @media(max-width:960px){
+  .home-hero{
+    /* Mobile navigation is 76px high; let content grow naturally if needed. */
+    min-height:calc(100vh - 76px);
+    min-height:calc(100svh - 76px);
+  }
   .home-hero-grid{
     display:grid;
     grid-template-columns:1fr;

@@ -1,0 +1,26 @@
+name: QORVEX website checks
+on:
+  push:
+    branches:
+      - feature/qorvex-corporate-site-v1
+  pull_request:
+    paths:
+      - "APEX SYNC INTELLIGENCE/**"
+      - ".github/workflows/qorvex-site-check.yml"
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: "APEX SYNC INTELLIGENCE"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: "APEX SYNC INTELLIGENCE/package-lock.json"
+      - run: npm ci
+      - run: npm run lint
+      - run: npm run build

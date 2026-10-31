@@ -8,6 +8,7 @@ import './qorvex3/base.css';
 import './qorvex3/pages.css';
 import './qorvex3/details.css';
 import './qorvex3/home-reference.css';
+import './qorvex3/first-fold.css';
 
 function RouteContent({path}:{path:string}) {
   switch(path){

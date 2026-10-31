@@ -4,31 +4,27 @@ import { notes } from './content';
 
 function HeroDevice(){
   return <div className="home-device" aria-hidden="true">
-    <div className="device-top"><span>QX / FUTURE STUDIES</span><span>FIG. 001</span></div>
     <div className="device-outer-ring"/>
     <div className="device-inner-ring"/>
     <div className="device-back-card"/>
     <div className="device-plane"><div className="device-cross"/><img src="/qorvex-emblem.svg" alt="" width="240" height="205"/></div>
-    <div className="device-footer"><span>PRECISION<br/>BY DESIGN</span><span>Q / V / E</span></div>
   </div>;
 }
 export function HomePage(){
   return <>
     <section className="home-hero">
-      <div className="page-frame home-prelude"><span>INDEPENDENT TECHNOLOGY & INNOVATION</span><span>QUEST / VISION / EXECUTION</span></div>
       <div className="page-frame home-hero-grid">
         <div className="home-hero-copy">
-          <div className="home-eyebrow"><span className="brand-signal"/> THE FUTURE IS NOT A DESTINATION</div>
           <h1>BUILD WHAT<br/><em>COMES NEXT.</em></h1>
           <div className="home-intro"><span className="intro-line"/><p>We explore what could exist, challenge what already does, and engineer technology that moves the world forward.</p></div>
           <div className="home-actions"><SiteLink className="button-copper" to="/company">Discover QORVEX <ArrowUpRight size={18}/></SiteLink><TextLink to="/cortex">Meet CORTEX</TextLink></div>
         </div>
         <HeroDevice/>
       </div>
-      <div className="page-frame home-herobar"><span>QORVEX / AN INDEPENDENT COMPANY</span><span>THE WORK BEGINS WITH A QUESTION.</span><ArrowDown size={17} aria-hidden="true"/></div>
+      <div className="page-frame home-herobar"><a href="#home-introduction" aria-label="Scroll to why QORVEX exists"><ArrowDown size={17} aria-hidden="true"/></a></div>
     </section>
 
-    <section className="home-statement warm-section">
+    <section className="home-statement warm-section" id="home-introduction">
       <div className="page-frame home-statement-grid">
         <SceneLabel number="01">WHY WE EXIST</SceneLabel>
         <div><h2>Not just to imagine the future.<br/><em>To build what matters.</em></h2><div className="home-statement-detail"><p>QORVEX is driven by a belief that important problems deserve ambitious thinking and disciplined execution. Technology should make complex things clearer, stronger and more useful.</p><TextLink to="/company">The company behind the work</TextLink></div></div>

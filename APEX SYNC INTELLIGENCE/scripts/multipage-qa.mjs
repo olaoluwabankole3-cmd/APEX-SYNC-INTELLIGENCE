@@ -55,6 +55,13 @@ async function check(page,path,width){
    assert.equal(await page.locator('.home-hero .home-actions a').count(),2,'hero CTAs unexpectedly changed');
    assert.equal(await page.locator('.home-intro p').textContent(),'We explore what could exist, challenge what already does, and engineer technology that moves the world forward.','main introduction changed');
    assert.equal(await page.locator('.home-herobar a[href="#home-introduction"]').count(),1,'scroll navigation missing');
+   const fold=await page.evaluate(()=>({
+     nextTop:document.querySelector('.home-statement')?.getBoundingClientRect().top,
+     heroBottom:document.querySelector('.home-hero')?.getBoundingClientRect().bottom,
+     screen:window.innerHeight
+   }));
+   assert.ok(fold.nextTop>=fold.screen-1,'cream section visible before scrolling: '+JSON.stringify(fold));
+   assert.ok(Math.abs(fold.heroBottom-fold.nextTop)<=2,'gap between hero and next section');
  }
  assert.ok(pageInfo.heading?.length>5,'page heading missing');
  assert.deepEqual(pageInfo.brokenImages,[], 'broken images');
@@ -80,6 +87,33 @@ for(const path of paths.filter(p=>p!=='/')){
   try{await check(page,path,width);}catch(error){errors.push({path,width,error:String(error)});console.error('FAILED '+path+' '+width,error);}
   await page.close();
  }
+}
+
+// Confirm first-fold behavior at actual desktop/laptop and phone viewport heights.
+for(const [width,height] of [[1728,864],[1440,900],[1366,768],[390,844],[320,640]]){
+  const page=await browser.newPage({viewport:{width,height},isMobile:width<=430,hasTouch:width<=430});
+  try{
+    await page.goto(origin,{waitUntil:'domcontentloaded'});
+    await page.evaluate(()=>document.fonts.ready);
+    const bounds=await page.evaluate(()=>({
+      nextTop:document.querySelector('.home-statement').getBoundingClientRect().top,
+      heroBottom:document.querySelector('.home-hero').getBoundingClientRect().bottom,
+      scrollTop:document.documentElement.scrollTop,
+      scrollWidth:document.documentElement.scrollWidth,
+      clientWidth:document.documentElement.clientWidth
+    }));
+    assert.ok(bounds.nextTop>=height-1,'cream section entered first viewport at '+width+'x'+height+': '+JSON.stringify(bounds));
+    assert.equal(bounds.scrollTop,0,'unexpected initial scroll position');
+    assert.ok(bounds.scrollWidth<=bounds.clientWidth+1,'horizontal overflow at '+width+'x'+height);
+    if(width>960){
+      const arrow=await page.locator('.home-herobar a').boundingBox();
+      assert.ok(arrow&&arrow.y+arrow.height<=height+1,'scroll cue outside initial desktop screen');
+    }
+    await page.screenshot({path:'qa-output/home-first-fold-'+width+'x'+height+'.png'});
+    console.log('FIRST FOLD PASS '+width+'x'+height+' - next section starts '+Math.round(bounds.nextTop)+'px down');
+    passed++;
+  }catch(error){errors.push({test:'first-fold',width,height,error:String(error)});console.error('FAILED fold '+width+'x'+height,error);}
+  await page.close();
 }
 
 // Verify actual site navigation, browser history and interactive controls.

@@ -51,6 +51,10 @@ async function check(page,path,width){
    assert.equal(visual.copper,'rgb(197, 141, 95)','copper headline color mismatch');
    assert.ok(visual.cardTransform&&visual.cardTransform!=='none','tilted Q card missing');
    assert.equal(visual.layers,2,'Q card layered construction missing');
+   assert.equal(await page.locator('.home-prelude,.home-eyebrow,.device-top,.device-footer,.home-herobar>span').count(),0,'redundant landing-page microcopy reappeared');
+   assert.equal(await page.locator('.home-hero .home-actions a').count(),2,'hero CTAs unexpectedly changed');
+   assert.equal(await page.locator('.home-intro p').textContent(),'We explore what could exist, challenge what already does, and engineer technology that moves the world forward.','main introduction changed');
+   assert.equal(await page.locator('.home-herobar a[href="#home-introduction"]').count(),1,'scroll navigation missing');
  }
  assert.ok(pageInfo.heading?.length>5,'page heading missing');
  assert.deepEqual(pageInfo.brokenImages,[], 'broken images');

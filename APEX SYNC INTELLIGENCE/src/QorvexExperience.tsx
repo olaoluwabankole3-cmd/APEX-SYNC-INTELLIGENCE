@@ -223,7 +223,7 @@ function FieldNotes() {
         {notes.map(note=><article className="note" key={note.id}>
           <div className="note-index"><span>{note.id}</span><span>FIELD NOTE</span></div>
           <div className="note-main"><span className="note-type">{note.type}</span><h3>{note.title}</h3><p>{note.lead}</p>
-          {open===note.id && <div className="note-full" id={'note-'+note.id}>{note.paragraphs.map((paragraph,i)=><p key={i}>{paragraph}</p>)}</div>}
+          <div className="note-full" id={'note-'+note.id} hidden={open!==note.id}>{note.paragraphs.map((paragraph,i)=><p key={i}>{paragraph}</p>)}</div>
           </div>
           <button type="button" className="note-button" aria-expanded={open===note.id} aria-controls={'note-'+note.id} onClick={()=>setOpen(current=>current===note.id?null:note.id)} aria-label={(open===note.id?'Close':'Read')+' note '+note.id}>{open===note.id?<X size={19} aria-hidden="true"/>:<ArrowUpRight size={21} aria-hidden="true"/>}</button>
         </article>)}

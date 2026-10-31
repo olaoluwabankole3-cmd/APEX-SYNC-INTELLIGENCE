@@ -1,0 +1,43 @@
+name: QORVEX multi-page visual QA
+on:
+  push:
+    branches:
+      - feature/qorvex-multipage-v3
+  pull_request:
+    paths:
+      - "APEX SYNC INTELLIGENCE/src/qorvex3/**"
+      - "APEX SYNC INTELLIGENCE/src/App.tsx"
+      - "APEX SYNC INTELLIGENCE/scripts/multipage-qa.mjs"
+      - ".github/workflows/qorvex-multipage-qa.yml"
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    defaults:
+      run:
+        working-directory: "APEX SYNC INTELLIGENCE"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: "APEX SYNC INTELLIGENCE/package-lock.json"
+      - run: npm ci
+      - run: npm run lint
+      - run: npm run build
+      - run: npm install --no-save playwright@1.57.0
+      - run: npx playwright install --with-deps chromium
+      - name: Start preview server
+        run: |
+          npm run preview -- --host 127.0.0.1 --port 4173 > /tmp/qorvex-multipage.log 2>&1 &
+          sleep 4
+      - name: Test every page, mobile sizes, navigation and controls
+        run: node scripts/multipage-qa.mjs
+      - name: Upload responsive screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: qorvex-multipage-screenshots
+          path: "APEX SYNC INTELLIGENCE/qa-output/"
+          if-no-files-found: ignore

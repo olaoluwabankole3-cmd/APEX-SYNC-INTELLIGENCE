@@ -1,6 +1,6 @@
 # QORVEX — Corporate Website V3
 
-This is the **multi-page QORVEX corporate website**, built from the earlier APEX SYNC INTELLIGENCE / QORVEX V1 and V2 design iterations. It preserves the approved QORVEX identity and separates the company's story, philosophy, product, innovation and editorial content into dedicated experiences.
+This is the **multi-page QORVEX corporate website**, built from the earlier QORVEX V1 and V2 design iterations. It preserves the approved QORVEX identity and separates the company's story, philosophy, product, innovation and editorial content into dedicated experiences.
 
 **Public release:** approved for deployment to the Cloudflare Pages production branch. Update the custom domain and official contact details separately.
 
@@ -44,7 +44,7 @@ This is the **multi-page QORVEX corporate website**, built from the earlier APEX
 
 ## Run locally
 
-From the \`APEX SYNC INTELLIGENCE\` directory:
+From the \`QORVEX\` directory:
 
 \`\`\`bash
 npm ci
@@ -53,7 +53,7 @@ npm run build
 npm run dev
 \`\`\`
 
-Vite builds to \`dist\`. Cloudflare Pages automatically creates a preview for this branch in the existing Pages project.
+Vite builds to \`dist\`. Cloudflare Pages automatically creates a preview for this branch in the connected Cloudflare Pages project.
 
 ## Corporate facts and integrity
 

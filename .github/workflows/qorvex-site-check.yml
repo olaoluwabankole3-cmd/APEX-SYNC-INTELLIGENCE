@@ -2,25 +2,32 @@ name: QORVEX website checks
 on:
   push:
     branches:
-      - feature/qorvex-corporate-site-v1
+      - main
+      - refactor/qorvex-repository-branding
   pull_request:
     paths:
-      - "APEX SYNC INTELLIGENCE/**"
+      - "QORVEX/**"
       - ".github/workflows/qorvex-site-check.yml"
 
 jobs:
   check:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     defaults:
       run:
-        working-directory: "APEX SYNC INTELLIGENCE"
+        working-directory: QORVEX
     steps:
       - uses: actions/checkout@v4
+      - name: Verify legacy Cloudflare build-directory compatibility
+        working-directory: .
+        run: |
+          test -L "APEX SYNC INTELLIGENCE"
+          test "$(readlink "APEX SYNC INTELLIGENCE")" = "QORVEX"
+          test -f "APEX SYNC INTELLIGENCE/package.json"
       - uses: actions/setup-node@v4
         with:
           node-version: 22
           cache: npm
-          cache-dependency-path: "APEX SYNC INTELLIGENCE/package-lock.json"
+          cache-dependency-path: QORVEX/package-lock.json
       - run: npm ci
       - run: npm run lint
       - run: npm run build

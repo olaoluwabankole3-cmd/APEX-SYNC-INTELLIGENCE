@@ -37,7 +37,7 @@ async function check(page,path,width){
  assert.equal(pageInfo.links,0,'dead # anchor(s)');
  assert.deepEqual(failures,[], 'page errors');
  const slug=path==='/'?'home':path.slice(1).replaceAll('/','-');
- if((width===390||width===1440) && !path.startsWith('/notes/'))await page.screenshot({path:'qa-output/'+slug+'-'+width+'-full.png',fullPage:true});
+ if((width===320||width===390||width===1440) && !path.startsWith('/notes/'))await page.screenshot({path:'qa-output/'+slug+'-'+width+'-full.png',fullPage:true});
  console.log(JSON.stringify({route:path,width,pass:true,title:pageInfo.title,overflow:false}));
  passed++;
 }
@@ -50,8 +50,8 @@ for(const width of widths){
 }
 
 for(const path of paths.filter(p=>p!=='/')){
- for(const width of [390,1440]){
-  const page=await browser.newPage({viewport:{width,height:900},deviceScaleFactor:1,hasTouch:width===390,isMobile:width===390});
+ for(const width of [320,390,430,768,1440]){
+  const page=await browser.newPage({viewport:{width,height:900},deviceScaleFactor:1,hasTouch:width<=430,isMobile:width<=430});
   page.setDefaultTimeout(15000);
   try{await check(page,path,width);}catch(error){errors.push({path,width,error:String(error)});console.error('FAILED '+path+' '+width,error);}
   await page.close();

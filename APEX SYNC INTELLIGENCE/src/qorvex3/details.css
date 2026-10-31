@@ -327,3 +327,7 @@
 .notes-index-number{font-size:22px}
 .note-filter{padding:8px 9px}
 }
+
+/* Touch targets: preserve comfortable controls on compact screens. */
+.note-filter,.workbench-copy button{min-height:44px}
+@media(max-width:620px){.note-filter{min-height:44px}.cx-tab{min-height:52px}.notes-index-item{min-height:148px}}

@@ -41,7 +41,8 @@
 .home-hero .page-frame{max-width:1310px}
 .home-hero-grid{
   flex:1 0 auto;
-  min-height:630px;
+  /* A shorter laptop still gets the full hero and visible scroll cue. */
+  min-height:min(630px, calc(100svh - 156px));
   padding:44px 0 66px;
   grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);
   column-gap:12px;

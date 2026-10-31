@@ -7,6 +7,7 @@ function HeroDevice(){
     <div className="device-top"><span>QX / FUTURE STUDIES</span><span>FIG. 001</span></div>
     <div className="device-outer-ring"/>
     <div className="device-inner-ring"/>
+    <div className="device-back-card"/>
     <div className="device-plane"><div className="device-cross"/><img src="/qorvex-emblem.svg" alt="" width="240" height="205"/></div>
     <div className="device-footer"><span>PRECISION<br/>BY DESIGN</span><span>Q / V / E</span></div>
   </div>;
@@ -18,7 +19,7 @@ export function HomePage(){
       <div className="page-frame home-hero-grid">
         <div className="home-hero-copy">
           <div className="home-eyebrow"><span className="brand-signal"/> THE FUTURE IS NOT A DESTINATION</div>
-          <h1>BUILD<br/>WHAT<br/><em>COMES NEXT.</em></h1>
+          <h1>BUILD WHAT<br/><em>COMES NEXT.</em></h1>
           <div className="home-intro"><span className="intro-line"/><p>We explore what could exist, challenge what already does, and engineer technology that moves the world forward.</p></div>
           <div className="home-actions"><SiteLink className="button-copper" to="/company">Discover QORVEX <ArrowUpRight size={18}/></SiteLink><TextLink to="/cortex">Meet CORTEX</TextLink></div>
         </div>

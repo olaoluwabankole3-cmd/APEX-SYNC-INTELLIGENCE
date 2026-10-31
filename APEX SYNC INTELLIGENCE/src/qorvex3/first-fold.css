@@ -1,0 +1,97 @@
+/*
+ * QORVEX / PAGE OPENING-SCREEN SYSTEM
+ *
+ * Extend each dedicated page introduction to at least the first viewport,
+ * excluding the sticky header, without changing page content or art direction.
+ * Intrinsic content may grow the hero naturally on small or short screens.
+ * This follows the independently approved homepage first-fold treatment.
+ */
+
+/* Every corporate page gets a complete, self-contained opening screen. */
+.company-hero,
+.approach-hero,
+.innovation-hero,
+.cx-hero,
+.notes-hero,
+.careers-hero,
+.contact-hero {
+  min-height: calc(100vh - 86px);
+  min-height: calc(100svh - 86px);
+  display: flex;
+  flex-direction: column;
+}
+
+/* Keep the existing page rails at the top and let the artwork and main
+   headline occupy the remaining room, rather than leaving empty bars. */
+.company-hero > .page-frame,
+.approach-hero > .page-frame,
+.innovation-hero > .page-frame,
+.cx-hero > .page-frame,
+.notes-hero > .page-frame,
+.careers-hero > .page-frame,
+.contact-hero > .page-frame {
+  flex: 1 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.company-hero-inner,
+.approach-hero-grid,
+.innovation-hero-grid,
+.notes-hero-layout,
+.careers-hero-grid,
+.contact-hero-grid {
+  flex: 1 0 auto;
+}
+
+/* CORTEX uses a product-title-led layout instead of a two-column artwork;
+   use auto spacing to distribute its existing elements gracefully. */
+.cx-hero > .page-frame > .cx-hero-divider {
+  margin-top: auto;
+  padding-top: 52px;
+}
+
+/* The Field Notes articles get the same complete opening screen:
+   the dark feature band is not visible before the first scroll. */
+.article-page > .page-frame:first-child {
+  min-height: calc(100vh - 86px);
+  min-height: calc(100svh - 86px);
+  display: flex;
+  flex-direction: column;
+}
+.article-page > .page-frame:first-child > .article-header {
+  flex: 1 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* Even the fallback page should feel intentional. */
+.not-found {
+  min-height: calc(100vh - 86px);
+  min-height: calc(100svh - 86px);
+}
+
+/* Match the actual 76px mobile/tablet navigation height. */
+@media (max-width: 960px) {
+  .company-hero,
+  .approach-hero,
+  .innovation-hero,
+  .cx-hero,
+  .notes-hero,
+  .careers-hero,
+  .contact-hero,
+  .article-page > .page-frame:first-child,
+  .not-found {
+    min-height: calc(100vh - 76px);
+    min-height: calc(100svh - 76px);
+  }
+}
+
+/* Natural scroll on compact phones: never clamp a long product or
+   article introduction into a fixed height or overlap the next section. */
+@media (max-width: 620px) {
+  .cx-hero > .page-frame > .cx-hero-divider {
+    padding-top: 42px;
+  }
+}

@@ -116,6 +116,55 @@ for(const [width,height] of [[1728,864],[1440,900],[1366,768],[390,844],[320,640
   await page.close();
 }
 
+// Each non-home page has its own complete opening screen before the next section.
+const firstFolds=[
+ ['/company','.company-hero','.company-philosophy'],
+ ['/approach','.approach-hero','.approach-workbench'],
+ ['/cortex','.cx-hero','.cx-problem'],
+ ['/innovation','.innovation-hero','.innovation-thesis'],
+ ['/notes','.notes-hero','.notes-index'],
+ ['/careers','.careers-hero','.careers-principles'],
+ ['/contact','.contact-hero','.contact-channels'],
+ ['/notes/the-future-is-a-construction-project','.article-page > .page-frame:first-child','.article-accent'],
+ ['/notes/information-is-not-understanding','.article-page > .page-frame:first-child','.article-accent'],
+ ['/notes/craft-is-a-technical-decision','.article-page > .page-frame:first-child','.article-accent']
+];
+for(const [path,firstSelector,nextSelector] of firstFolds){
+  for(const [width,height] of [[1728,864],[1366,768],[390,844],[320,640]]){
+    const page=await browser.newPage({viewport:{width,height},isMobile:width<=430,hasTouch:width<=430});
+    try{
+      await page.goto(origin+path,{waitUntil:'domcontentloaded'});
+      await page.evaluate(()=>document.fonts.ready);
+      const measured=await page.evaluate(({firstSelector,nextSelector})=>{
+        const first=document.querySelector(firstSelector);
+        const next=document.querySelector(nextSelector);
+        const heading=document.querySelector('h1');
+        return {
+          firstTop:first?.getBoundingClientRect().top,
+          firstBottom:first?.getBoundingClientRect().bottom,
+          nextTop:next?.getBoundingClientRect().top,
+          headingTop:heading?.getBoundingClientRect().top,
+          viewport:window.innerHeight,
+          screenWidth:document.documentElement.clientWidth,
+          scrollWidth:document.documentElement.scrollWidth
+        };
+      },{firstSelector,nextSelector});
+      assert.ok(measured.firstBottom!=null&&measured.nextTop!=null,'opening or next section missing '+path);
+      assert.ok(measured.nextTop>=height-1,'second section visible on first screen '+path+' '+width+'x'+height+': '+JSON.stringify(measured));
+      assert.ok(measured.firstBottom<=measured.nextTop+2,'hero overlaps next section '+path);
+      assert.ok(measured.headingTop!=null&&measured.headingTop<height,'title below initial screen '+path);
+      assert.ok(measured.scrollWidth<=measured.screenWidth+1,'horizontal overflow '+path+' '+width);
+      if(width===1728||width===390){
+        const label=path.replaceAll('/','-').replace(/^-/, '');
+        await page.screenshot({path:'qa-output/first-fold-'+label+'-'+width+'x'+height+'.png'});
+      }
+      console.log('INNER FOLD PASS '+path+' '+width+'x'+height+' - next section '+Math.round(measured.nextTop)+'px');
+      passed++;
+    }catch(error){errors.push({test:'inner-first-fold',path,width,height,error:String(error)});console.error('FAILED inner fold '+path+' '+width+'x'+height,error);}
+    await page.close();
+  }
+}
+
 // Verify actual site navigation, browser history and interactive controls.
 const mobile=await browser.newPage({viewport:{width:390,height:844},isMobile:true,hasTouch:true});
 try{

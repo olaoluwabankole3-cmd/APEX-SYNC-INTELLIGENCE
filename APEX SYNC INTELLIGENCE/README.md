@@ -1,20 +1,41 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://ai.google.dev/static/site-assets/images/share-ais-513315318.png" />
-</div>
+# QORVEX Corporate Website — Initial Brand Integration
 
-# Run and deploy your AI Studio app
+This is a non-destructive first iteration of the QORVEX website based on the original APEX SYNC INTELLIGENCE React/Vite project. The feature branch preserves all legacy site components for reference, but the new entry point renders QORVEX-specific content.
 
-This contains everything you need to run your app locally.
+## Start
 
-View your app in AI Studio: https://ai.studio/apps/1a38d2b8-b99a-4a1e-b64b-2cb233451907
+From the \`APEX SYNC INTELLIGENCE\` directory:
 
-## Run Locally
+\`\`\`bash
+npm install
+npm run dev
+npm run lint
+npm run build
+\`\`\`
 
-**Prerequisites:**  Node.js
+## New site code
 
+- \`src/QorvexSite.tsx\`: responsive single-page corporate website
+- \`src/qorvex.css\`: QORVEX design system and responsive styles
+- \`public/qorvex-wordmark.svg\`: approved brand SVG wordmark
+- \`public/qorvex-emblem.svg\`: approved geometric Q emblem
+- \`public/favicon.svg\`: approved app icon construction
+- \`src/App.tsx\`: renders QorvexSite
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+## Business content safeguards
+
+- QORVEX is the company; CORTEX is its **only current product**.
+- CORTEX is identified as **in development**, with initial focus on financial institutions.
+- No unverified jobs, client names, testimonials, numerical performance claims, legal registrations, or corporate contact details are published.
+- No fake contact form: the Contact section explicitly says contact channels are pending verification.
+- There is no production domain/deployment configuration yet.
+
+## Before launching
+
+1. Verify final brand approval and trademark/domain availability.
+2. Provide a verified corporate contact address and working backend or mail service if a form is desired.
+3. Review accessibility, SEO, responsive behavior, build output, and security headers.
+4. Determine whether the site should be split into separate SEO-friendly routes/pages.
+5. Confirm hiring claims and whether a journal has genuine approved articles.
+
+The original site remains intact on the repository's \`main\` branch. This branch is intended for review only.

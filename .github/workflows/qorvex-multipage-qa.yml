@@ -2,27 +2,28 @@ name: QORVEX multi-page visual QA
 on:
   push:
     branches:
-      - feature/qorvex-multipage-v3
+      - main
+      - refactor/qorvex-repository-branding
   pull_request:
     paths:
-      - "APEX SYNC INTELLIGENCE/src/qorvex3/**"
-      - "APEX SYNC INTELLIGENCE/src/App.tsx"
-      - "APEX SYNC INTELLIGENCE/scripts/multipage-qa.mjs"
+      - "QORVEX/src/**"
+      - "QORVEX/scripts/multipage-qa.mjs"
       - ".github/workflows/qorvex-multipage-qa.yml"
+
 jobs:
   verify:
     runs-on: ubuntu-24.04
     timeout-minutes: 25
     defaults:
       run:
-        working-directory: "APEX SYNC INTELLIGENCE"
+        working-directory: QORVEX
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
           node-version: 22
           cache: npm
-          cache-dependency-path: "APEX SYNC INTELLIGENCE/package-lock.json"
+          cache-dependency-path: QORVEX/package-lock.json
       - run: npm ci
       - run: npm run lint
       - run: npm run build
@@ -39,5 +40,5 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: qorvex-multipage-screenshots
-          path: "APEX SYNC INTELLIGENCE/qa-output/"
+          path: QORVEX/qa-output/
           if-no-files-found: ignore

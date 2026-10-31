@@ -3,12 +3,6 @@ on:
   push:
     branches:
       - feature/qorvex-experience-v2
-  pull_request:
-    paths:
-      - "APEX SYNC INTELLIGENCE/src/QorvexExperience.tsx"
-      - "APEX SYNC INTELLIGENCE/src/qorvex-v2.css"
-      - "APEX SYNC INTELLIGENCE/scripts/responsive-check.mjs"
-      - ".github/workflows/qorvex-mobile-qa.yml"
 
 jobs:
   responsive:

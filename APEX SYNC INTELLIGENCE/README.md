@@ -1,37 +1,76 @@
-# QORVEX Corporate Website — Experience V2
+# QORVEX — Corporate Website V3
 
-A brand-led, responsive company website built on the existing React / Vite foundation. This is a design-review branch, not the production site.
+This is the **multi-page QORVEX corporate website**, built from the earlier APEX SYNC INTELLIGENCE / QORVEX V1 and V2 design iterations. It preserves the approved QORVEX identity and separates the company's story, philosophy, product, innovation and editorial content into dedicated experiences.
 
-## What's new
+**This branch is a review prototype. The public production branch remains unchanged.**
 
-- Custom **editorial/architectural** visual language, not a generic AI-dashboard landing page
-- A tailored hero composition centered on the approved QORVEX wordmark and emblem
-- Purposeful interactive **QORVEX Method** (Quest / Vision / Execution / Impact)
-- An accessible, content-rich **CORTEX** conceptual systems showcase
-- Original short-form **Field Notes** to give the website meaningful reading value
-- Mobile-first navigation and layout adaptations with 320–430 px support
-- Reduced-motion support, keyboard-accessible controls, semantic landmarks, and skip link
-- Independent verified corporate information only; no invented claims or fake contact form
+## Website pages
 
-## Run
+| Route | Purpose |
+|---|---|
+| \`/\` | Editorial homepage and company/product introduction |
+| \`/company\` | Corporate philosophy, origin and brand interpretation |
+| \`/approach\` | Four-stage interactive method: Quest / Vision / Execution / Impact |
+| \`/cortex\` | Current product, planned architecture, intelligence models and oversight |
+| \`/innovation\` | Research and engineering philosophy |
+| \`/notes\` | Filterable original editorial Field Notes |
+| \`/notes/:slug\` | Distinct full-length article pages with browser-readable URLs |
+| \`/careers\` | Working culture and truthful current role status |
+| \`/contact\` | Corporate enquiry topics and honest contact-channel status |
+| Other | Designed 404 page |
 
-From \`APEX SYNC INTELLIGENCE\`:
+### Implementation
 
-\`\`\`sh
+- React, TypeScript, Vite and the project's existing packages
+- Path-based navigation via the browser History API, with back/forward handling
+- Shared site header/footer and custom per-page art direction
+- Custom responsive CSS with breakpoints down to 320px
+- Accessibility: skip navigation, semantic headings, ARIA tabs and menu, focus outlines, reduced-motion support, touch targets
+- Original vector/SVG graphic language and actual QORVEX SVG assets
+- Live browser QA with Playwright, screenshots, and checks for mobile layouts
+
+### File structure
+
+- \`src/qorvex3/layout.tsx\` — routing, header, footer and page helpers
+- \`src/qorvex3/home.tsx\` — homepage
+- \`src/qorvex3/corporate.tsx\` — company, approach and innovation
+- \`src/qorvex3/cortex.tsx\` — CORTEX product page and interactive concept illustration
+- \`src/qorvex3/editorial.tsx\` — Field Notes, articles, careers, contact and 404
+- \`src/qorvex3/content.ts\` — single place for editorial and product narrative content
+- \`src/qorvex3/base.css\` — brand/layout styles
+- \`src/qorvex3/pages.css\` — corporate and home styles
+- \`src/qorvex3/details.css\` — product, editorial and contact styles
+- \`scripts/multipage-qa.mjs\` — automated route and mobile QA
+
+## Run locally
+
+From the \`APEX SYNC INTELLIGENCE\` directory:
+
+\`\`\`bash
 npm ci
 npm run lint
 npm run build
 npm run dev
 \`\`\`
 
-## Review before launch
+Vite builds to \`dist\`. Cloudflare Pages automatically creates a preview for this branch in the existing Pages project.
 
-1. Check 320 / 360 / 390 / 430 / 768 / 1024 / 1440 px widths on real browsers and touch devices.
-2. Validate color contrast, reduced motion, keyboard navigation and screen-reader announcements.
-3. Approve final corporate messaging and writing. The two field notes are editorial drafts, not news reports.
-4. Supply verified contact channel and approved privacy notice before adding forms or analytics.
-5. Perform Lighthouse performance/accessibility auditing and consider font self-hosting.
-6. Confirm domain, trademark and company registration statements before production deployment.
-7. For long-term content discovery, split Field Notes into accessible permalink pages when a publishing workflow is established.
+## Corporate facts and integrity
 
-The original APEX SYNC implementation is retained on \`main\`; the QORVEX V1 work is retained on \`feature/qorvex-corporate-site-v1\`. Do not deploy V2 to production until reviewed.
+- QORVEX is the company; CORTEX is its **only current product**.
+- CORTEX is described as **in development**; diagrams are explicitly conceptual, not working-product screenshots.
+- No invented institutional clients, achievements, verified legal status, quantitative outcomes, ownership relationships or job vacancies.
+- No fake contact form, fabricated public corporate email, or nonexistent back-end submission.
+- Field Notes are **original editorial perspectives**, not dated news claims.
+
+## Before a public launch
+
+1. Founder approval of each page and brand artwork.
+2. Test on real iOS and Android devices in addition to automated responsive browser runs.
+3. Provide **verified** contact details and legal/privacy documents before creating enquiry forms.
+4. Remove the temporary \`noindex, nofollow\` meta tag when the final domain, canonical URLs and launch are approved.
+5. Set up analytics with privacy consideration and a genuine editorial workflow.
+6. Consider building static route-level HTML via SSR or prerendering for the strongest search indexing and social sharing.
+7. Run Lighthouse and accessibility reviews, self-host fonts, verify 404 behavior on Cloudflare Pages, then deploy deliberately.
+
+This prototype has not been merged into production.

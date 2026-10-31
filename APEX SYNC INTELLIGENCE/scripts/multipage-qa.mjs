@@ -32,6 +32,26 @@ async function check(page,path,width){
  assert.ok(pageInfo.docWidth<=width+1, 'horizontal page overflow '+JSON.stringify(pageInfo));
  assert.ok(pageInfo.bodyWidth<=width+1, 'body overflow '+JSON.stringify(pageInfo));
  assert.ok(pageInfo.title.includes('QORVEX'), 'QORVEX title missing');
+ if(path==='/'){
+   const visual=await page.evaluate(()=>{
+     const hero=document.querySelector('.home-hero');
+     const heading=hero?.querySelector('h1');
+     const copper=heading?.querySelector('em');
+     const plate=hero?.querySelector('.device-plane');
+     return {
+       copy:heading?.innerText?.replace(/\s+/g,' ').trim(),
+       grid:getComputedStyle(hero,'::before').backgroundImage,
+       copper:copper?getComputedStyle(copper).color:null,
+       cardTransform:plate?getComputedStyle(plate).transform:null,
+       layers:hero?.querySelectorAll('.device-plane,.device-back-card').length,
+     };
+   });
+   assert.match(visual.copy??'',/BUILD WHAT\s+COMES NEXT\./,'hero headline wording changed');
+   assert.ok(visual.grid.includes('linear-gradient'),'architectural grid background missing');
+   assert.equal(visual.copper,'rgb(197, 141, 95)','copper headline color mismatch');
+   assert.ok(visual.cardTransform&&visual.cardTransform!=='none','tilted Q card missing');
+   assert.equal(visual.layers,2,'Q card layered construction missing');
+ }
  assert.ok(pageInfo.heading?.length>5,'page heading missing');
  assert.deepEqual(pageInfo.brokenImages,[], 'broken images');
  assert.equal(pageInfo.links,0,'dead # anchor(s)');
